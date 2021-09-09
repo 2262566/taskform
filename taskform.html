@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<style>
+    .container{
+    margin: 0px 50px 0 50px;
+    background-color: rgb(222, 144, 238);
+    height: 100vh;
+    border: 1px solid black;
+}
+#header{
+    text-align: center;
+    text-decoration:black underline;
+
+}
+h4{
+    display: inline-block;
+    margin: 0;
+    
+}
+
+
+label{
+    display: inline-block;
+    width: 140px;
+    text-align: left;
+    line-height: 2;
+    
+  }
+
+  label::after{
+      content: ":";
+  }
+
+  #addr{
+      width:150px;
+      height:40px;
+  }
+
+  #idly{
+      padding-left: 20px;
+  }
+
+  #detailtable{
+      width: 100%;
+  }
+
+  table, th,tr{
+
+      border: 1px solid black;
+      text-align: center;
+  }
+
+  #submitButton{
+
+    margin-left: 142px ;
+  }
+
+
+</style>
+<body>
+      
+ <div class="container">
+        <div class="mainForm">
+            <h2 id="header">Personal Details Form</h2>
+             <form onsubmit="return false;">
+                 <label for="fname"><strong>First Name</strong></label>
+                 <input type="text" id="fname">
+                 <br>
+                 <label for="lname"><strong>Last Name</strong></label>
+                 <input type="text" id="lname">
+                 <br>
+                 <label for="addr"><strong>Address</strong></label>
+                 <input type="text" id="addr">
+                 <br>
+                 <label for="pincode"><strong>Pincode</strong></label>
+                 <input type="text" id="pincode">
+                 <br>
+                 <label for="gender"><strong>Gender</strong></label>
+                 <h4>Male</h4>
+                 <input type="radio" id="male" name="gender" class="gender" value="male">
+                 <h4>Female</h4>
+                 <input type="radio" id="female" name="gender" class="gender" value="female"> 
+                 <br>
+                 <label><strong>Food</strong></label>
+                 <h4 for="idly">idly</h4>
+                 <input type="radio" id="idly" class="food" value="idly">
+                 <h4 for="dosa">dosa</h4>
+                 <input type="radio" id="dosa" class="food" value="dosa">
+                 <h4 for="chapathi">chapathi</h4>
+                 <input type="radio" id="chapathi" class="food" value="chapathi">
+                 <h4 for="parota">parota</h4>
+                 <input type="radio" id="parota" class="food" value="parota">
+                 <h4 for="icecream">icecream</h4>
+                 <input type="radio" id="icecream" class="food" value="icecream">
+                  <br>
+
+                 <label for="state"><strong>State</strong></label>
+                 <select id="state">
+                       <option value="TN">Tamil Nadu</option>
+                       <option value="KL">Kerala</option>
+                       <option value="KN">Karnataka</option>
+                       <option value="TL">Telangana</option>
+                       <option value="AP">Andhra Pradesh</option>
+
+                 </select>
+                 <br>
+
+                 <label for="country"><strong>Country</strong></label>
+                 <select id="country">
+                       <option value="IND">India</option>
+                       <option value="US">US</option>
+                       <option value="Canada">Canada</option>
+                 </select>
+                 <br>
+
+              <input type="submit" id="submitButton" onclick="adddetail()">
+
+             </form>
+             <br><br><br>
+        </div>
+
+        <div class="table">
+           <table id="detailtable">
+               <thead>
+                   <tr>
+                       <th>First Name</th>
+                       <th>Last Name</th>
+                       <th>Address</th>
+                       <th>Pincode</th>
+                       <th>Gender</th>
+                       <th>Food</th>
+                       <th>State</th>
+                       <th>Country</th>
+                   </tr>
+
+               </thead>
+               <tbody id="tableBody">
+
+               </tbody> 
+
+           </table>
+
+        </div>
+
+ </div>
+    
+    <script>
+        
+
+let adddetail = () => {
+ const fname = document.getElementById("fname");
+const lname = document.getElementById("lname");
+const addr = document.getElementById("addr");
+const pincode = document.getElementById("pincode");
+const gender = document.querySelectorAll(".gender");
+const food = document.querySelectorAll(".food");
+const state = document.getElementById("state");
+const country = document.getElementById("country");
+    
+    console.log(fname.value);
+    console.log(lname.value);
+
+    let fnameinfo = fname.value;
+    let lnameinfo = lname.value;
+    let addrinfo = addr.value;
+    let pincodeinfo = pincode.value;
+    let genderinfo ;
+    let foodinfo = [];
+    let stateinfo ;
+    let countryinfo ;
+    gender.forEach(element => {
+
+        if(element.checked){
+            genderinfo = (element.value);
+
+        } 
+    });
+
+    food.forEach(element => {
+
+        if(element.checked){
+            foodinfo.push(element.value);
+
+        } 
+    });
+
+    stateinfo = state.value;
+    countryinfo = country.value;   
+
+    
+    console.log(fnameinfo);
+    console.log(lnameinfo);
+    console.log(addrinfo);
+    console.log(pincodeinfo);
+    console.log(genderinfo);
+    console.log(foodinfo);
+    console.log(stateinfo);
+    console.log(countryinfo);   
+
+   
+    const tableRow = document.querySelector("#tableBody");
+
+     const html = ` <tr>
+                 <td>${fnameinfo}</td>
+                 <td>${lnameinfo}</td>
+                 <td>${addrinfo}</td>
+                 <td>${pincodeinfo}</td>
+                 <td>${genderinfo}</td>
+                 <td>${foodinfo}</td>
+                 <td>${stateinfo}</td>
+                 <td>${countryinfo}</td>
+                      </tr>`;
+
+                      tableRow.insertAdjacentHTML("afterend",html);
+
+     
+}
+
+
+
+
+    </script>
+</body>
+</html>
